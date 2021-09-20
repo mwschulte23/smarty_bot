@@ -1,0 +1,77 @@
+version: "2.0"
+
+# Ordering of topics: Intents, responses, entities, slots, forms, actions, & session config
+
+intents:
+  - greet
+  - goodbye
+  - query
+  - affirm
+  - deny
+  - bot_challenge
+
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_confirm_query:
+    - text: "To confirm
+
+      You want '{metric} over last {number} {time_dimension}'?"
+
+  utter_retry:
+    - text: "Got it, could you rephrase your question?"
+
+  utter_query_response:
+    - text: |-
+        I found {metric} prospects over the last {number} {time_dimension}
+
+  utter_anything_else:
+    - text: "Do you have any more questions?"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+
+entities:
+  - metric
+  - time_dimension
+  - number
+
+
+slots:
+  metric:
+    type: text
+    influence_conversation: false
+  time_dimension:
+    type: categorical
+    values:
+      - days
+      - weeks
+      - months
+      - years
+    influence_conversation: false
+  number:
+    type: float
+    min_value: 1
+    max_value: 100
+    influence_conversation: false
+
+
+#forms:
+#  query_form:
+#    required_slots:
+#      eating_hours:
+#        - type: from_entity
+#          entity: eating_hours
+
+actions:
+  - action_query_response
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

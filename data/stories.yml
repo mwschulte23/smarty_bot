@@ -1,0 +1,23 @@
+version: "2.0"
+
+stories:
+- story: quick query path
+  steps:
+  - intent: query
+  - action: utter_confirm_query
+  - intent: affirm
+  - action: action_query_response
+  - action: utter_anything_else
+  - intent: deny
+  - action: utter_goodbye
+
+- story: retry query path
+  steps:
+  - intent: query
+  - action: utter_confirm_query
+  - intent: deny
+  - action: utter_retry
+  - intent: query
+  - action: action_query_response
+  - intent: goodbye
+  - action: utter_goodbye

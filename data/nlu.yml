@@ -1,0 +1,68 @@
+version: "2.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - good afternoon
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: query
+  examples: |
+    - how many [leads]{"entity": "metric", "value": "prospects"} in the last [eight](number) [weeks](time_dimension)
+    - do you know the number of [prospects](metric) over the last [4](number) [days](number)
+    - how many [leads]("entity": "metric", "value": "prospects") have been created in the last [3](number) [years](time_dimension)
+    - [prospects](metric) in last [five](number) [years](time_dimension)
+    - count of [prospects](metric) over last [15](number) [days](time_dimension)
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - yep
+    - yeah
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
