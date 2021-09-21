@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres:9.4
+    restart: always
+    environment:
+      POSTGRES_USER: mike
+      POSTGRES_PASSWORD: mike
+      POSTGRES_DB: jaffle_shop
+    volumes:
+      - ~/db_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+#volumes:
+#  database-data:
