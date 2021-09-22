@@ -13,6 +13,8 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 
+from .helpers.db_adapter import DatabaseAdapter
+
 
 class ActionQueryResponse(Action):
 
@@ -24,9 +26,15 @@ class ActionQueryResponse(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         slots = ['metric', 'number', 'time_dimension']
 
-        msg_params = {'metric': np.random.randint(low=0, high=100),
-                      'number': int(tracker.get_slot('number')),
-                      'time_dimension': tracker.get_slot('time_dimension'),
+        number = int(tracker.get_slot('number'))
+        time_dim = tracker.get_slot('time_dimension')
+
+        db = DatabaseAdapter(time_num=number, time_dim=time_dim)
+        results = db.query_db()
+
+        msg_params = {'metric': results,
+                      'number': number,
+                      'time_dimension': time_dim,
                       }
 
         dispatcher.utter_message(template='utter_query_response', **msg_params)
